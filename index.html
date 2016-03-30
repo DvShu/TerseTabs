@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一种情况的tab标签</title>
+    <link rel="stylesheet" href="./style/terse_tabs_provide.css">
+    <style>
+
+        .div1{
+            /* 内容部分，水平排列,左边显示行号,右边显示代码片段 */
+            /* Firefox */
+            display:-moz-box;
+            -moz-box-orient:vertical;
+
+            /* Safari、Opera 以及 Chrome */
+            display:-webkit-box;
+            -webkit-box-orient:vertical;
+            width: 500px;height:200px;
+            border: thin solid blue;
+        }
+
+        .div2{
+            /* 内容部分，水平排列,左边显示行号,右边显示代码片段 */
+            /* Firefox */
+            display:-moz-box;
+            -moz-box-orient:horizontal;
+
+            /* Safari、Opera 以及 Chrome */
+            display:-webkit-box;
+            -webkit-box-orient:horizontal;
+            width: 500px;height:200px;
+            border: thin solid blue;
+        }
+    </style>
+    <!-- 引入jquery -->
+    <script src="http://cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="./js/terse_tabs.js"></script>
+    <script>
+        $(function(){
+
+            $("#tabs1").terseTabs({
+                /* 切换样式,每一种样式之间用空格分隔,第一种样式为为选中时(默认)的样式,第二种样式为选中时的样式 */
+                "toggleClass" : "terse_tab_item_normal terse_tab_item_selected",
+                // 选项卡切换事件
+                "onChange" : function (i) {
+                    var content = "";
+                    if(i == 0){
+                        content = "这是语文课";
+                    }else if(i == 1){
+                        content = "这是数学课";
+                    }else if(i == 2){
+                        content = "这是英语课";
+                    }
+                    $("#content").html(content);
+                }
+            });
+
+            $("#tabs2").terseTabs({
+                "onChange" : function (i) {
+                    var content = "";
+                    if(i == 0){
+                        content = "这是语文课";
+                    }else if(i == 1){
+                        content = "这是数学课";
+                    }else if(i == 2){
+                        content = "这是英语课";
+                    }
+                    $("#content1").html(content);
+                }
+            });
+
+            $("#tabs3").terseTabs({
+                "defaultIndex": -1, // 初始没有选中项
+                "toggleClass" : "terse_tab_item_selected terse_tab_item_normal",
+                "onChange" : function (i) {
+                    var content = "";
+                    if(i == 0){
+                        content = "这是语文课";
+                    }else if(i == 1){
+                        content = "这是数学课";
+                    }else if(i == 2){
+                        content = "这是英语课";
+                    }
+                    alert(content);
+                }
+            });
+
+            $("#tabs4").terseTabs({
+                "toggleClass" : "terse_tab_item_selected terse_tab_item_normal",
+                "defaultIndex": -1, // 初始没有选中项
+                "onChange" : function (i) {
+                    var content = "";
+                    if(i == 0){
+                        content = "这是语文课";
+                    }else if(i == 1){
+                        content = "这是数学课";
+                    }else if(i == 2){
+                        content = "这是英语课";
+                    }
+                    alert(content);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h3>水平 无边距</h3>
+    <div class="div1">
+        <!-- 声明：这些样式仅为提供的样式，如果觉得样式不好，可以自己声明样式表,不会影响使用
+            其中：terse_tab_pack样式为主样式,其解决的问题的有：
+                1.去除ul li前面的项目编号
+                2.去除ul li的默认的内外边距
+                3.设置文本不能被选择
+         -->
+        <ul id="tabs1" class="terse_tab_pack terse_tabs_style0">
+            <li class="terse_tab_style0">语文</li>
+            <li class="terse_tab_style0">数学</li>
+            <li class="terse_tab_style0">英语</li>
+        </ul>
+        <div style="width: 100%;height: 160px;background: white;">
+            <span id="content">这是语文课</span>
+        </div>
+    </div>
+    <h3>垂直 无边距</h3>
+    <div class="div2">
+        <ul id="tabs2" class="terse_tab_pack terse_tabs_style1">
+            <li class="terse_tab_style1">语文</li>
+            <li class="terse_tab_style1">数学</li>
+            <li class="terse_tab_style1">英语</li>
+        </ul>
+        <div>
+            <span id="content1">这是语文课</span>
+        </div>
+    </div>
+    <h3>水平 有边距</h3>
+        <ul id="tabs3" class="terse_tab_pack terse_tabs_style2">
+            <li class="terse_tab_style2">语文</li>
+            <li class="terse_tab_style2" style="margin-left: 50px">数学</li>
+            <li class="terse_tab_style2" style="margin-left: 50px">英语</li>
+        </ul>
+
+    <br><br><h3>垂直 有边距</h3>
+    <ul id="tabs4" class="terse_tab_pack terse_tabs_style3">
+        <li class="terse_tab_style3">语文</li>
+        <li class="terse_tab_style3" style="margin-top: 10px">数学</li>
+        <li class="terse_tab_style3" style="margin-top: 10px">英语</li>
+    </ul>
+</body>
+</html>

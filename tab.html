@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用CSS实现选项卡切换效果</title>
+    <style>
+        body{
+            margin: 0;
+            padding:0;
+            font-family: 'Microsoft YaHei';
+        }
+        /* 设置选项卡为相对布局 */
+        .tersetabs{
+            position: relative;
+
+        }
+
+        /* 相对于选项卡绝对布局,这样单选按钮就会脱离文档结构,
+        不影响下面的标签,不占下面标签的位置,让下面的标签顶上来 */
+        .tersetabs input[type='radio'] {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            opacity: 0; /* 设置完全透明,这样就看不到单选按钮框了 */
+        }
+
+        .tersetabs .tersetabs_label{
+            padding: 15px 30px;
+            font-size: 0; /* 去掉inline-block元素之间的空隙方法 */
+            text-align: center;
+        }
+
+        .tersetabs .tersetabs_label label{
+            width: 30%;
+            text-align: center;
+            font-size: 14px;
+            display: inline-block; /* 让所有的lable统一作为一行并为一块 */
+            color: #498fee;
+            border: 1px solid #498fee;
+            margin: 0;
+            padding: 5px 0;
+        }
+        /* 第一个label标签 */
+        .tersetabs .tersetabs_label label:first-child{
+            border-right: 0;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        /* 最后一个label标签 */
+        .tersetabs .tersetabs_label label:last-child{
+            border-left: 0;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        /* 设置选项卡切换后,更改相应颜色 */
+        /*
+            X ~ Y:与匹配X相邻的Y选择器
+        */
+        .tersetabs input[type='radio']:nth-of-type(1):checked ~ .tersetabs_label label:nth-of-type(1){
+            background-color: #498fee;
+            color: white;
+        }
+        .tersetabs input[type='radio']:nth-of-type(2):checked ~ .tersetabs_label label:nth-of-type(2){
+            background-color: #498fee;
+            color: white;
+        }
+        .tersetabs input[type='radio']:nth-of-type(3):checked ~ .tersetabs_label label:nth-of-type(3){
+            background-color: #498fee;
+            color: white;
+        }
+    </style>
+    <!-- 引入jquery -->
+    <script src="http://cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script>
+        // 页面加载完成后的调用方法
+        $(function () {
+            // 为每一个radio添加change事件
+            $("input[type='radio']").on('change', function (e) {
+                alert("change : " + $(this).index());
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div class="tersetabs">
+        <input id="tersetabs_tab1" type="radio" name="tersetabs_tabs" checked>
+        <input id="tersetabs_tab2" type="radio" name="tersetabs_tabs">
+        <input id="tersetabs_tab3" type="radio" name="tersetabs_tabs">
+        <div class="tersetabs_label">
+            <!-- 使用for跟相应的单选按钮绑定在一起,
+            这样点击文本的时候,也能让相应的单选按钮切换 -->
+            <label for="tersetabs_tab1">语文</label>
+            <label for="tersetabs_tab2">数学</label>
+            <label for="tersetabs_tab3">英语</label>
+        </div>
+    </div>
+
+</body>
+</html>
