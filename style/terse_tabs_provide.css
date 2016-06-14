@@ -15,11 +15,6 @@
     user-select:none;
 }
 
-/* 每一个切换标签li的样式 */
-.terse_tab_pack li{
-    cursor: pointer; /* 定义鼠标悬浮时的手型 */
-}
-
 /* 默认的选项卡选中时的样式 */
 .terse_tab_pack .terse_tab_item_selected{
     background: white;
